@@ -1,0 +1,29 @@
+---
+- hosts: master
+  become: true
+  tasks:
+    - name: initialize the cluster
+      shell: kubeadm init --pod-network-cidr=10.244.0.0/16
+      args:
+        chdir: /home/k8s-user
+
+    - name: create .kube directory
+      become: true
+      file:
+        path: /home/k8s-user/.kube
+        state: directory
+        mode: "0755"
+
+    - name: copy admin.conf to user's kube config
+      copy:
+        src: /etc/kubernetes/admin.conf
+        dest: /home/k8s-user/.kube/config
+        remote_src: true
+        owner: k8s-user
+
+    - name: install Pod network
+      become: true
+      become_user: k8s-user
+      shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+      args:
+        chdir: /home/k8s-user

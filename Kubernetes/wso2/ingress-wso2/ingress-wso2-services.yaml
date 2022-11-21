@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: common-ingress
+  namespace: test-env
+  annotations:
+    environment: Test
+    owner: pokatilov-ov
+    project: WSO2-K8s-Project
+spec:
+  rules:
+  - host: wso2am.ukrposhta.test-env
+    http:
+        paths:
+          - pathType: Prefix
+            path: /devportal
+            backend:
+              service:
+                name: wso-api-manager
+                port:
+                  number: 30002
+          - pathType: Prefix
+            path: /publisher
+            backend:
+              service:
+                name: wso-api-manager
+                port:
+                  number: 30002
+  - host: wso2eii.ukrposhta.test-env
+    http:
+        paths:
+          - pathType: Prefix
+            path: /carbon/
+            backend:
+              service:
+                name: wso-ei-integrator
+                port:
+                  number: 30001

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-wso2am
+  namespace: test-env
+  labels:
+    app: wso-api-manager
+  annotations:
+    environment: Test
+    owner: pokatilov-ov
+    project: WSO2-K8s-Project
+spec:
+  # replicas: 2
+  # minReadySeconds: 300
+  # strategy:
+  #   rollingUpdate:
+  #     maxSurge: 1
+  #     maxUnavailable: 0
+  #   type: RollingUpdate
+  selector:
+    matchLabels:
+      app: wso-api-manager
+  template:
+    metadata:
+      labels:
+        app: wso-api-manager
+    spec:
+      containers:
+        - name: wso2am
+          image: wso2/wso2am:4.1.0-centos
+          ports:
+            - containerPort: 5672
+            - containerPort: 8243
+            - containerPort: 8280
+            - containerPort: 9099
+            - containerPort: 9443
+            - containerPort: 9611
+            - containerPort: 9711
+            - containerPort: 9763
+            - containerPort: 9999
+            - containerPort: 11111
+          resources:
+            requests:
+              cpu: 2
+              memory: 3000M
+            limits:
+              cpu: 2
+              memory: 4000M

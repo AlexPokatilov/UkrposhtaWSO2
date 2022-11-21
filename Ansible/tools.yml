@@ -1,0 +1,53 @@
+---
+- hosts: all
+  become: true
+  vars:
+    packages:
+      [
+        "iputils-ping",
+        "git",
+        "net-tools",
+        "python3-pip",
+        "nmap",
+        "ntp",
+        "ca-certificates",
+        "neofetch",
+      ]
+  tasks:
+    - name: Install Package
+      apt: name={{ item }} state=latest
+      with_items: "{{ packages }}"
+
+    - name: Create a neofetch directory if it does not exist
+      ansible.builtin.file:
+        path: /etc/neofetch/
+        state: directory
+        mode: "0644"
+
+    - name: Update Neofetch
+      copy:
+        src: /home/pokatilov-ov/Other/config.conf
+        dest: /etc/neofetch/
+        mode: "0644"
+
+    - name: Check Neofetch
+      shell: neofetch
+      args:
+        chdir: $HOME
+
+    - name: Use -x mode for welcome message directory
+      ansible.builtin.file:
+        path: /etc/update-motd.d/
+        state: directory
+        mode: -x
+
+    - name: Update welcome message
+      copy:
+        src: /home/pokatilov-ov/Other/welcome-message-script
+        dest: /etc/update-motd.d/
+
+    - name: Use +x mode for welcome message directory
+      ansible.builtin.file:
+        path: /etc/update-motd.d/welcome-message-script
+        state: touch
+        mode: +x

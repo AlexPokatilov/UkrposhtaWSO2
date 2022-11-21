@@ -1,0 +1,22 @@
+all:
+  children:
+    master:
+      hosts:
+        master-1:
+          10.255.132.16:
+            ansible_user: k8s-user
+
+    workers:
+      hosts:
+        worker-1:
+          10.255.132.15:
+            ansible_user: k8s-user
+        worker-2:
+          10.255.132.14:
+            ansible_user: k8s-user
+        worker-3:
+          10.255.132.13:
+            ansible_user: k8s-user
+
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
