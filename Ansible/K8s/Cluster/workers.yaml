@@ -11,7 +11,7 @@
       set_fact:
         join_command: "{{ join_command_raw.stdout_lines[0] }}"
 
-- hosts: workers
+- hosts: worker-0
   become: true
   tasks:
     - name: join cluster

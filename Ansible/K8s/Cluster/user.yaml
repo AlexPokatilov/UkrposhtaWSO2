@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: worker-0
   become: true
   tasks:
     - name: create the 'k8s-user' user

@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: worker-0
   become: true
   tasks:
     - name: Disable SWAP since Kubernetes can't work with swap (1/2)
@@ -56,11 +56,11 @@
         name: kubeadm=1.22.4-00
         state: present
 
-- hosts: master
-  become: true
-  tasks:
-    - name: install kubectl
-      apt:
-        name: kubectl=1.22.4-00
-        state: present
-        force: true
+# - hosts: master
+#   become: true
+#   tasks:
+#     - name: install kubectl
+#       apt:
+#         name: kubectl=1.22.4-00
+#         state: present
+#         force: true
