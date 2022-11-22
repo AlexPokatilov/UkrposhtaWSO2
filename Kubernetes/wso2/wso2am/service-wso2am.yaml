@@ -10,6 +10,7 @@ metadata:
     owner: pokatilov-ov
     project: WSO2-K8s-Project
 spec:
+  sessionAffinity: ClientIP
   selector:
     app: wso-api-manager
   ports:
