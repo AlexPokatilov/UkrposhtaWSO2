@@ -7,11 +7,19 @@ metadata:
     environment: Test
     owner: pokatilov-ov
     project: WSO2-K8s-Project
+    kubernetes.io/ingress.class: nginx
 spec:
   rules:
   - host: wso2am.ukrposhta.test-env
     http:
         paths:
+          - pathType: Prefix
+            path: /carbon
+            backend:
+              service:
+                name: wso-api-manager
+                port:
+                  number: 30002
           - pathType: Prefix
             path: /devportal
             backend:
@@ -26,11 +34,11 @@ spec:
                 name: wso-api-manager
                 port:
                   number: 30002
-  - host: wso2eii.ukrposhta.test-env
+  - host: wso2ei.wso2-k8s-test-env.pp.ua
     http:
         paths:
           - pathType: Prefix
-            path: /carbon/
+            path: /carbon
             backend:
               service:
                 name: wso-ei-integrator
