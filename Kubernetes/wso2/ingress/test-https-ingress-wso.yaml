@@ -10,7 +10,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-  - host: wso2am.ukrposhta.test-env
+  - host: wso2am.wso2-k8s-test-env.pp.ua
     http:
         paths:
           - pathType: Prefix
@@ -34,7 +34,7 @@ spec:
                 name: wso-api-manager
                 port:
                   number: 30002
-  - host: wso2eii.ukrposhta.test-env
+  - host: wso2eii.wso2-k8s-test-env.pp.ua
     http:
         paths:
           - pathType: Prefix
