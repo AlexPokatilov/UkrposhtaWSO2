@@ -38,7 +38,7 @@ spec:
     http:
         paths:
           - pathType: Prefix
-            path: /carbon
+            path: /carbon/
             backend:
               service:
                 name: wso-ei-integrator
