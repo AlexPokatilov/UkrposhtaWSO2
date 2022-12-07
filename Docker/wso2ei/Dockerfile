@@ -59,7 +59,8 @@ ARG WSO2_SERVER_HOME=${USER_HOME}/${WSO2_SERVER}
 
 
 # Waiting for custom wso2ei archive
-ARG WSO2_SERVER_DIST_URL=https://github.com/wso2/product-ei/releases/download/v${WSO2_SERVER_VERSION}/${WSO2_SERVER}.zip
+# ARG WSO2_SERVER_DIST_URL=https://github.com/wso2/product-ei/releases/download/v${WSO2_SERVER_VERSION}/${WSO2_SERVER}.zip
+ARG WSO2_SERVER_DIST_URL=https://github.com/AlexPokatilov/UkrposhtaWSO2/releases/download/v6.6.0/wso2ei-6.6.0.zip
 
 
 # build arguments for external artifacts
